@@ -29,6 +29,8 @@ createApp({
     },
     addTask(){
       console.log(this.newTask);
+      this.todoList.push(this.newTask);
+      this.newTask= '';
     }
   },
   mounted(){
