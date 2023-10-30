@@ -18,15 +18,29 @@
 <body class="bg-body-secondary">
   <div id="app" class="container my-5 p-3 bg-light rounded-3">
     <h1 class="text-center">{{title}}</h1>
-    <ul class="list-group">
+    
+    <ul class="list-group mb-3">
       <li
-        v-for="cosaDaFara in fintoArray"
-        class="list-group-item list-group-item-action list-group-item-warning"
+        v-for="(cosaDaFare, index) in todoList"
+        class="list-group-item list-group-item-warning"
       >
-        <input class="form-check-input me-1" type="checkbox" id="firstCheckbox">
-        <label class="form-check-label" for="firstCheckbox">{{cosaDaFara}}</label>
+        <input class="form-check-input me-1" type="checkbox" name="toogleDoneTask" id="toogleDoneTask">
+        <label class="form-check-label " name="task" for="toogleDoneTask">{{cosaDaFare}}</label>
       </li>
     </ul>
+
+    <div class="input-group mb-3">
+      <input
+        @keyup.enter="addTask"
+        v-model.trim="newTask"
+        type="text"
+        class="form-control"
+        placeholder="Inserisci una nuova task"
+        aria-label="Text input with checkbox"
+      >
+      <button @click="addTask" class="btn btn-danger">invia</button>
+    </div>
+    
   </div>
 
   <script src="js/script.js"></script>

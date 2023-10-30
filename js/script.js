@@ -11,14 +11,27 @@ createApp({
         "Chiamare l'idraulico",
         "Pitturare casa"
       ],
-      todoList: []
+      todoList: [],
+      newTask: ''
     }
   },
-  created(){
-    axios.get('todo-list.json')
+  methods: {
+    getTodoList(){
+      axios
+      .get('todo-list.json')
       .then(resp => {
         console.log(resp.data);
         this.todoList = resp.data
       })
+      .catch(err => {
+        console.log(err);
+      });
+    },
+    addTask(){
+      console.log(this.newTask);
+    }
+  },
+  mounted(){
+    this.getTodoList();
   }
 }).mount('#app');
