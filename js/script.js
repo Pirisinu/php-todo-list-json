@@ -32,7 +32,8 @@ createApp({
       data.append('newTaskItem', this.newTask);
       axios.post(this.apiUrl, data)
         .then(resp => {
-          this.todoList.push(this.newTask);
+          this.todoList = resp.data
+          //this.todoList.push(this.newTask);
           this.newTask= '';
         })
         .catch(err => {
