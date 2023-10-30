@@ -10,7 +10,15 @@ createApp({
         "Andare in montagna",
         "Chiamare l'idraulico",
         "Pitturare casa"
-      ]
+      ],
+      todoList: []
     }
+  },
+  created(){
+    axios.get('todo-list.json')
+      .then(resp => {
+        console.log(resp.data);
+        this.todoList = resp.data
+      })
   }
 }).mount('#app');
