@@ -3,6 +3,7 @@ const { createApp } = Vue ;
 createApp({
   data(){
     return{
+      apiUrl: 'todo-list.json',
       title: 'Todo-List',
       fintoArray:[
         "Fare una corsa",
@@ -18,9 +19,8 @@ createApp({
   methods: {
     getTodoList(){
       axios
-      .get('todo-list.json')
+      .get(this.apiUrl)
       .then(resp => {
-        console.log(resp.data);
         this.todoList = resp.data
       })
       .catch(err => {
@@ -28,9 +28,16 @@ createApp({
       });
     },
     addTask(){
-      console.log(this.newTask);
-      this.todoList.push(this.newTask);
-      this.newTask= '';
+      const data = new FormData();
+      data.append('newTaskItem', this.newTask);
+      axios.post(this.apiUrl, data)
+        .then(resp => {
+          this.todoList.push(this.newTask);
+          this.newTask= '';
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   mounted(){
