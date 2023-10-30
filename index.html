@@ -15,9 +15,18 @@
 
   <title>Todo list Full-stack</title>
 </head>
-<body>
-  <div id="app">
-    <h1>{{title}}</h1>
+<body class="bg-body-secondary">
+  <div id="app" class="container my-5 p-3 bg-light rounded-3">
+    <h1 class="text-center">{{title}}</h1>
+    <ul class="list-group">
+      <li
+        v-for="cosaDaFara in fintoArray"
+        class="list-group-item list-group-item-action list-group-item-warning"
+      >
+        <input class="form-check-input me-1" type="checkbox" id="firstCheckbox">
+        <label class="form-check-label" for="firstCheckbox">{{cosaDaFara}}</label>
+      </li>
+    </ul>
   </div>
 
   <script src="js/script.js"></script>
