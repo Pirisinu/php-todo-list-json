@@ -3,7 +3,7 @@ const { createApp } = Vue ;
 createApp({
   data(){
     return{
-      apiUrl: 'todo-list.json',
+      apiUrl: 'server.php',
       title: 'Todo-List',
       fintoArray:[
         "Fare una corsa",
@@ -33,7 +33,6 @@ createApp({
       axios.post(this.apiUrl, data)
         .then(resp => {
           this.todoList = resp.data
-          //this.todoList.push(this.newTask);
           this.newTask= '';
         })
         .catch(err => {
