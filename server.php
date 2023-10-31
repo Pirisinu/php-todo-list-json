@@ -21,6 +21,13 @@ if (isset($_POST['indexToggle'])) {
   $list_todo[$index]->done = !$list_todo[$index]->done;
   file_put_contents('todo-list.json', json_encode($list_todo));
 }
+if (isset($_POST['indexDel'])) {
+  $index = $_POST['indexDel'];
+  $newarray = array_splice($list_todo, $index, 1);
+  file_put_contents('todo-list.json', json_encode($list_todo));
+}
+
+
 
 //Trasformo il file PHP in un file Json
 header('Content-Type: application/json');
