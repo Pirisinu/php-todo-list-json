@@ -27,6 +27,7 @@ createApp({
       axios.post(this.apiUrl, data)
         .then(resp => {
           this.todoList = resp.data;
+          console.log(resp.data);
           this.newTask= '';
         })
         .catch(err => {
@@ -36,6 +37,16 @@ createApp({
     toggleTaskStatus(singleTask) {
       singleTask.done = !singleTask.done;
       console.log(singleTask.done);
+      const data = new FormData();
+      data.append('newTaskStatus', singleTask.done);
+      axios.post(this.apiUrl, data)
+        .then(resp => {
+          this.todoList = resp.data;
+          this.newTask= '';
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     deleteTask(index) {
       console.log('elemento ' + index);
@@ -44,5 +55,6 @@ createApp({
   },
   mounted(){
     this.getTodoList();
+    this.addTask()
   }
 }).mount('#app');
