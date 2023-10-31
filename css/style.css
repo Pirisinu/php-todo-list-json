@@ -6,3 +6,6 @@
 .task-done{
   text-decoration: line-through;
 }
+i:hover{
+  font-size: 1.3rem;
+}

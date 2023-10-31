@@ -5,15 +5,9 @@ createApp({
     return{
       apiUrl: 'server.php',
       title: 'Todo-List',
-      fintoArray:[
-        "Fare una corsa",
-        "Incontrare gli amici",
-        "Andare in montagna",
-        "Chiamare l'idraulico",
-        "Pitturare casa"
-      ],
       todoList: [],
-      newTask: ''
+      newTask: '',
+      isChecked: false
     }
   },
   methods: {
@@ -32,13 +26,21 @@ createApp({
       data.append('newTaskItem', this.newTask);
       axios.post(this.apiUrl, data)
         .then(resp => {
-          this.todoList = resp.data
+          this.todoList = resp.data;
           this.newTask= '';
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    toggleTaskStatus(singleTask) {
+      singleTask.done = !singleTask.done;
+      console.log(singleTask.done);
+    },
+    deleteTask(index) {
+      console.log('elemento ' + index);
     }
+    ,
   },
   mounted(){
     this.getTodoList();

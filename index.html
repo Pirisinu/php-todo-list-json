@@ -6,6 +6,8 @@
 
   <!-- BOOTSTRAP -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.css' integrity='sha512-r0fo0kMK8myZfuKWk9b6yY8azUnHCPhgNz/uWDl2rtMdWJlk7gmd9socvGZdZzICwAkMgfTkVrplDahQ07Gi0A==' crossorigin='anonymous'/>
+  <!-- FONTAWESOME -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css' integrity='sha512-KOWhIs2d8WrPgR4lTaFgxI35LLOp5PRki/DxQvb7mlP29YZ5iJ5v8tiLWF7JLk5nDBlgPP1gHzw96cZ77oD7zQ==' crossorigin='anonymous'/>
   <!-- Vue -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <!-- CSS -->
@@ -21,12 +23,34 @@
     
     <ul class="list-group mb-3">
       <li
-        v-for="(cosaDaFare, index) in todoList"
-        class="list-group-item list-group-item-warning"
+        v-for="(singleTask, index) in todoList"
+        :class="{'task-done': singleTask.completed}"
+        class="list-group-item list-group-item-warning d-flex justify-content-between"
       >
-        <input class="form-check-input me-1" type="checkbox" name="toogleDoneTask" id="toogleDoneTask">
-        <label class="form-check-label " name="task" for="toogleDoneTask">{{cosaDaFare}}</label>
+
+      <div>
+        <input 
+          v-model="singleTask.completed"
+          class="form-check-input me-1" 
+          type="checkbox" 
+          name="toogleDoneTask" 
+          id="toogleDoneTask"
+          @click="toggleTaskStatus(singleTask)"
+          >
+          <label 
+          class="form-check-label" 
+          :class="{ 'task-done': singleTask.completed }"
+        >
+          {{singleTask.task}}
+        </label>
+      </div>
+
+      <div class="icon-box text-danger" @click="deleteTask(index)">
+        <i class="fa-solid fa-trash"></i>
+      </div>
+
       </li>
+      
     </ul>
 
     <div class="input-group mb-3">
@@ -38,7 +62,7 @@
         placeholder="Inserisci una nuova task"
         aria-label="Text input with checkbox"
       >
-      <button @click="addTask" class="btn btn-danger">invia</button>
+      <button @click="addTask" class="btn btn-info">invia</button>
     </div>
     
   </div>
