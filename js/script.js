@@ -40,10 +40,6 @@ createApp({
       const data = new FormData();
       data.append('indexToggle', index);
       axios.post(this.apiUrl, data)
-      .then(resp => {
-
-        console.log(index);
-      })
         .catch(err => {
           console.log(err);
         });
