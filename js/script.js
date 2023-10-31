@@ -36,13 +36,13 @@ createApp({
           });
       }
     },
-    toggleTaskStatus(singleTask, index) {
+    toggleTaskStatus(index) {
       const data = new FormData();
       data.append('indexToggle', index);
       axios.post(this.apiUrl, data)
       .then(resp => {
-        this.todoList = resp.data;
-        console.log(singleTask.done);
+
+        console.log(index);
       })
         .catch(err => {
           console.log(err);
@@ -55,6 +55,5 @@ createApp({
   },
   mounted(){
     this.getTodoList();
-    this.addTask()
   }
 }).mount('#app');

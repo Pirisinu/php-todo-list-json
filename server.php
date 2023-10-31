@@ -19,7 +19,7 @@ if(isset($_POST['newTaskItem'])){
 if (isset($_POST['indexToggle'])) {
   $index = $_POST['indexToggle'];
   //Push new task nella lista
-  $list_todo[$index]["done"]=true;
+  $list_todo[$index]["done"] = true;
   file_put_contents('todo-list.json', json_encode($list_todo));
 }
 
