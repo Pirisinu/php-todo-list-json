@@ -24,22 +24,22 @@
     <ul class="list-group mb-3">
       <li
         v-for="(singleTask, index) in todoList"
-        :class="{'task-done': singleTask.completed}"
+        :class="{'task-done': singleTask.done}"
         class="list-group-item list-group-item-warning d-flex justify-content-between"
       >
 
       <div>
         <input 
-          v-model="singleTask.completed"
+          v-model="singleTask.done"
           class="form-check-input me-1" 
           type="checkbox" 
           name="toogleDoneTask" 
           id="toogleDoneTask"
-          @click="toggleTaskStatus(singleTask)"
+          @click="toggleTaskStatus(singleTask,index)"
           >
           <label 
           class="form-check-label" 
-          :class="{ 'task-done': singleTask.completed }"
+          :class="{ 'task-done': singleTask.done }"
         >
           {{singleTask.task}}
         </label>

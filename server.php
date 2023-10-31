@@ -8,10 +8,18 @@ $list_todo = json_decode($json_todo_string);
 /*logica per ricodifica array json*/
 
 if(isset($_POST['newTaskItem'])){
+  $newTask = [
+    "task" => $_POST['newTaskItem'],
+    "done" => false
+  ];
   //Push new task nella lista
-  $newTask = $_POST['newTaskItem'];
   $list_todo[] = $newTask;
-
+  file_put_contents('todo-list.json', json_encode($list_todo));
+}
+if (isset($_POST['indexToggle'])) {
+  $index = $_POST['indexToggle'];
+  //Push new task nella lista
+  $list_todo[$index]["done"]=true;
   file_put_contents('todo-list.json', json_encode($list_todo));
 }
 

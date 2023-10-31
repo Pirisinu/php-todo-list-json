@@ -7,7 +7,7 @@ createApp({
       title: 'Todo-List',
       todoList: [],
       newTask: '',
-      isChecked: false
+      isDone: ''
     }
   },
   methods: {
@@ -22,28 +22,28 @@ createApp({
       });
     },
     addTask(){
-      const data = new FormData();
-      data.append('newTaskItem', this.newTask);
-      axios.post(this.apiUrl, data)
-        .then(resp => {
-          this.todoList = resp.data;
-          console.log(resp.data);
-          this.newTask= '';
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      if(this.newTask){
+        const data = new FormData();
+        data.append('newTaskItem', this.newTask);
+        axios.post(this.apiUrl, data)
+          .then(resp => {
+            this.todoList = resp.data;
+            console.log(resp.data);
+            this.newTask= '';
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     },
-    toggleTaskStatus(singleTask) {
-      singleTask.done = !singleTask.done;
-      console.log(singleTask.done);
+    toggleTaskStatus(singleTask, index) {
       const data = new FormData();
-      data.append('newTaskStatus', singleTask.done);
+      data.append('indexToggle', index);
       axios.post(this.apiUrl, data)
-        .then(resp => {
-          this.todoList = resp.data;
-          this.newTask= '';
-        })
+      .then(resp => {
+        this.todoList = resp.data;
+        console.log(singleTask.done);
+      })
         .catch(err => {
           console.log(err);
         });
